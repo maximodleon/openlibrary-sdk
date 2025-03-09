@@ -1,6 +1,8 @@
-export function getTitle(q: string) {
+import { type SearchParams } from '../types/search-api.ts'
+
+export function getTitle(params: SearchParams) {
   const urlSearchParams = new URLSearchParams();
-  urlSearchParams.append('q', q);
+  urlSearchParams.append('q', params.q);
 
   const url = new URL(`https://openlibrary.org/search.json?${urlSearchParams}`);
 
