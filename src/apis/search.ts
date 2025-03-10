@@ -1,9 +1,8 @@
-import { type SearchParams } from '../types/search-api.ts'
+import { type SearchParams, type SearchResponse } from '../types/search-api.ts'
 
-export function getTitle(params: SearchParams) {
+export async function getTitle(params: SearchParams): Promise<SearchResponse> {
   const urlSearchParams = new URLSearchParams();
   urlSearchParams.append('q', params.q);
-  urlSearchParams.append('fields', params.fields);
 
   const url = new URL(`https://openlibrary.org/search.json?${urlSearchParams}`);
 
@@ -11,5 +10,13 @@ export function getTitle(params: SearchParams) {
     method: "GET",
   }
 
-  return fetch(url, options);
+  const response = await fetch(url, options);
+
+  if (!response.ok) {
+    throw new Error(`Error calling the API. Error code ${response.status}`); 
+  }
+
+  const data = await response.json();
+
+  return data as SearchResponse;
 }

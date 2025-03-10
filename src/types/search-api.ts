@@ -1,6 +1,6 @@
 export type SearchParams = {
   q: string,
-  fields?: any,
+  fields?: string,
   sort?: string,
   lang?: string,
   offset?: number,
@@ -8,10 +8,8 @@ export type SearchParams = {
   page?: number
 }
 
-// TODO go the doc and add the correct list of fields
-// from here https://github.com/internetarchive/openlibrary/blob/b4afa14b0981ae1785c26c71908af99b879fa975/openlibrary/plugins/worksearch/schemes/works.py#L38-L91
-// these fields could be optional since from the query
-// we can specify which one we wanr
+// Full list of field here https://github.com/internetarchive/openlibrary/blob/b4afa14b0981ae1785c26c71908af99b879fa975/openlibrary/plugins/worksearch/schemes/works.py#L38-L91
+// these fields could be optional since from the query we can specify which one we want
 type SearchResponseDocument = {
   cover_i: number,
   has_fulltext: boolean,
@@ -22,7 +20,11 @@ type SearchResponseDocument = {
   key: string,
   ia: string[], // item availability (ia)
   author_key: string[],
-  public_scan_b: boolean
+  public_scan_b: boolean,
+  isbn: string,
+  subject: string,
+  publisher: string,
+  language: string
 }
 
 export type SearchResponse = {
