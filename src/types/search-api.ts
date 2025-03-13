@@ -1,5 +1,12 @@
-export type SearchParams = {
+export type BookSearchParams = {
   q: string,
+  title?: string,
+  author?: string,
+  subject?: string,
+  place?: string,
+  person?: string,
+  language?: string,
+  publisher?: string,
   fields?: string,
   sort?: string,
   lang?: string,
@@ -10,7 +17,7 @@ export type SearchParams = {
 
 // Full list of field here https://github.com/internetarchive/openlibrary/blob/b4afa14b0981ae1785c26c71908af99b879fa975/openlibrary/plugins/worksearch/schemes/works.py#L38-L91
 // these fields could be optional since from the query we can specify which one we want
-type SearchResponseDocument = {
+type BookSearchResponseDocument = {
   cover_i: number,
   has_fulltext: boolean,
   edition_count: number,
@@ -27,8 +34,8 @@ type SearchResponseDocument = {
   language: string
 }
 
-export type SearchResponse = {
+export type BookSearchResponse = {
   start: number,
   nums_found: number,
-  docs: SearchResponseDocument[]
+  docs: BookSearchResponseDocument[]
 }

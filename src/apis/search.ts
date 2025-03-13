@@ -1,9 +1,24 @@
-import { type SearchParams, type SearchResponse } from '../types/search-api.ts';
 import { BASE_URL } from '../constants/index.ts';
+import { getProperty } from '../utils/index.ts';
+import { type BookSearchParams, type BookSearchResponse } from '../types/search-api.ts';
 
-export async function getTitle(params: SearchParams): Promise<SearchResponse> {
+function buildSearchParams(params: BookSearchParams): URLSearchParams {
   const urlSearchParams = new URLSearchParams();
-  urlSearchParams.append('q', params.q);
+
+  for (const key in params) {
+    if (Object.prototype.hasOwnProperty.call(params, key)) {
+       const value = getProperty(params, key as keyof BookSearchParams);
+       if (value) {
+         urlSearchParams.append(key, `${value}`);
+       }
+    }
+  }
+
+  return urlSearchParams;
+}
+
+export async function searchBook(params: BookSearchParams): Promise<BookSearchResponse> {
+  const urlSearchParams = buildSearchParams(params);
 
   const url = new URL(`${BASE_URL}/search.json?${urlSearchParams}`);
 
@@ -19,5 +34,5 @@ export async function getTitle(params: SearchParams): Promise<SearchResponse> {
 
   const data = await response.json();
 
-  return data as SearchResponse;
+  return data as BookSearchResponse;
 }
