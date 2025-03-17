@@ -36,3 +36,22 @@ export async function searchBook(params: BookSearchParams): Promise<BookSearchRe
 
   return data as BookSearchResponse;
 }
+
+// TODO: return real type
+export async function searchIndividualAuthor(authorKey: string): Promise<any> {
+  const url = new URL(`${BASE_URL}/authors/${authorKey}.json`);
+
+  const options: RequestInit = {
+    method: "GET",
+  }
+
+  const response = await fetch(url, options);
+
+  if (!response.ok) {
+    throw new Error(`Error calling the API. Error code ${response.status}`); 
+  }
+
+  const data = await response.json();
+
+  return data;
+}

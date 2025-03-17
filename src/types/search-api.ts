@@ -5,7 +5,6 @@ export type BookSearchParams = {
   subject?: string,
   place?: string,
   person?: string,
-  language?: string,
   publisher?: string,
   fields?: string,
   sort?: string,
