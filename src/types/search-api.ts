@@ -38,3 +38,37 @@ export type BookSearchResponse = {
   nums_found: number,
   docs: BookSearchResponseDocument[]
 }
+
+type AuthorRemoteIds = {
+  viaf: string,
+  gooreads: string,
+  storygraph: string,
+  isni: string,
+  librarything: string,
+  amazon: string,
+  wikidata: string
+}
+
+type AuthorMetadata = {
+  type: string,
+  value: string
+}
+
+export type  AuthorData = {
+  personal_name: string,
+  key: string,
+  entity_type: string,
+  birth_date: string,
+  links: string[],
+  alternate_names: string[],
+  name: string,
+  title: string,
+  bio: string,
+  fuller_name: string,
+  source_records: string[],
+  remote_ids: AuthorRemoteIds,
+  latest_revision: number,
+  revision: number,
+  created: AuthorMetadata,
+  last_modified: AuthorMetadata,
+}
