@@ -40,7 +40,7 @@ export async function searchBook(params: BookSearchParams): Promise<BookSearchRe
 export async function searchAuthors(query: string): Promise<AuthorSearchResponse> {
   const urlSearchParams = new URLSearchParams();
   urlSearchParams.append('q', query);
-  const url = new URL(`${BASE_URL}/authors.json?${urlSearchParams}`);
+  const url = new URL(`${BASE_URL}/search/authors.json?${urlSearchParams}`);
 
   const options: RequestInit = {
     method: "GET",
@@ -51,6 +51,7 @@ export async function searchAuthors(query: string): Promise<AuthorSearchResponse
   if (!response.ok) {
     throw new Error(`Error calling the API. Error code ${response.status}`); 
   }
+
 
   const data = await response.json();
 
