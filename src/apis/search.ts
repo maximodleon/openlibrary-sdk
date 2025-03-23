@@ -1,6 +1,6 @@
 import { BASE_URL } from '../constants/index.ts';
 import { getProperty } from '../utils/index.ts';
-import { type BookSearchParams, type BookSearchResponse, type AuthorData } from '../types/search-api.ts';
+import { type BookSearchParams, type BookSearchResponse, type AuthorData, type AuthorSearchResponse } from '../types/search-api.ts';
 
 function buildSearchParams(params: BookSearchParams): URLSearchParams {
   const urlSearchParams = new URLSearchParams();
@@ -35,6 +35,26 @@ export async function searchBook(params: BookSearchParams): Promise<BookSearchRe
   const data = await response.json();
 
   return data as BookSearchResponse;
+}
+
+export async function searchAuthros(query: string): Promise<AuthorSearchResponse> {
+  const urlSearchParams = new URLSearchParams();
+  urlSearchParams.append('q', query);
+  const url = new URL(`${BASE_URL}/authors.json?${urlSearchParams}`);
+
+  const options: RequestInit = {
+    method: "GET",
+  }
+
+  const response = await fetch(url, options);
+
+  if (!response.ok) {
+    throw new Error(`Error calling the API. Error code ${response.status}`); 
+  }
+
+  const data = await response.json();
+
+  return data as AuthorSearchResponse;
 }
 
 export async function getIndividualAuthor(authorKey: string): Promise<AuthorData> {
