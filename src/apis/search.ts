@@ -34,10 +34,10 @@ export async function searchBook(params: BookSearchParams): Promise<BookSearchRe
 
   const data = await response.json();
 
-  return data as BookSearchResponse;
+  return data;
 }
 
-export async function searchAuthros(query: string): Promise<AuthorSearchResponse> {
+export async function searchAuthors(query: string): Promise<AuthorSearchResponse> {
   const urlSearchParams = new URLSearchParams();
   urlSearchParams.append('q', query);
   const url = new URL(`${BASE_URL}/authors.json?${urlSearchParams}`);
@@ -91,5 +91,5 @@ export async function getIndividualAuthor(authorKey: string): Promise<AuthorData
 
   const data = await response.json();
 
-  return data as AuthorData;
+  return data;
 }

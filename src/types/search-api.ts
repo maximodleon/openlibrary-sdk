@@ -39,6 +39,7 @@ export type BookSearchResponse = {
   docs: BookSearchResponseDocument[]
 }
 
+// Author search types 
 type AuthorSearchResponseDocument = {
   name: string,
   alternate_names?: string[],
