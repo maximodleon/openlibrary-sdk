@@ -2,6 +2,11 @@ import { BASE_URL } from '../constants/index.ts';
 import { getProperty } from '../utils/index.ts';
 import { type BookSearchParams, type BookSearchResponse, type AuthorData, type AuthorSearchResponse, type SubjectSearchResponse } from '../types/search-api.ts';
 
+/**
+ * Build the search params for the API
+ * @param params params to build the search params from
+ * @returns URLSearchParams
+ */
 function buildSearchParams(params: BookSearchParams): URLSearchParams {
   const urlSearchParams = new URLSearchParams();
 
@@ -17,6 +22,12 @@ function buildSearchParams(params: BookSearchParams): URLSearchParams {
   return urlSearchParams;
 }
 
+
+/**
+ * Search for books
+ * @param params params to search for
+ * @returns BookSearchResponse
+ */
 export async function searchBook(params: BookSearchParams): Promise<BookSearchResponse> {
   const urlSearchParams = buildSearchParams(params);
 
@@ -37,6 +48,11 @@ export async function searchBook(params: BookSearchParams): Promise<BookSearchRe
   return data;
 }
 
+/**
+ * Search for authors
+ * @param query query to search for
+ * @returns AuthorSearchResponse
+ */
 export async function searchAuthors(query: string): Promise<AuthorSearchResponse> {
   const urlSearchParams = new URLSearchParams();
   urlSearchParams.append('q', query);
@@ -58,6 +74,11 @@ export async function searchAuthors(query: string): Promise<AuthorSearchResponse
   return data;
 }
 
+/**
+ * Search for a subject
+ * @param subject subject to search for
+ * @returns SubjectSearchResponse
+ */
 export async function searchSubject(subject: string): Promise<SubjectSearchResponse> {
   const url = new URL(`${BASE_URL}/subjects/${subject}.json`);
 
@@ -77,6 +98,11 @@ export async function searchSubject(subject: string): Promise<SubjectSearchRespo
 }
 
 
+/**
+ * Get an individual author
+ * @param authorKey author key to get
+ * @returns AuthorData
+ */
 export async function getIndividualAuthor(authorKey: string): Promise<AuthorData> {
   const url = new URL(`${BASE_URL}/authors/${authorKey}.json`);
 
